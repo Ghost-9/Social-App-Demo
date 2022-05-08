@@ -3,6 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:social_app_demo/provider/uploadpage.dart';
 import 'package:social_app_demo/utilities/constants.dart';
+import 'package:social_app_demo/utilities/snackbar.dart';
 
 class UploadPage extends StatelessWidget {
   const UploadPage({Key? key}) : super(key: key);
@@ -17,7 +18,16 @@ class UploadPage extends StatelessWidget {
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
             child: MaterialButton(
-              onPressed: () => null,
+              onPressed: () {
+                if (state.videoPath == null) {
+                  showSnackbar(
+                      context: context,
+                      message: 'Select any video to upload',
+                      bgColor: Colors.red);
+                } else {
+                  state.uploadVideo();
+                }
+              },
               child: const Text(
                 'Upload Video',
               ),

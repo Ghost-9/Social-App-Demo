@@ -7,25 +7,42 @@ class UploadPageProvider extends ChangeNotifier {
   final TextEditingController captionController = TextEditingController();
   String? _thumbnailPath;
   String? get thumbnailPath => _thumbnailPath;
+  String? _videoPath;
+  String? get videoPath => _videoPath;
 
-  Future<void> _uploadVideo(
-      {required String title,
-      required String pathName,
-      required String description}) async {
-    try {} catch (e) {
+  Future<void> uploadVideo(
+
+      //   required String title,
+      // required String pathName,
+      // required String description
+      ) async {
+    try {
+      _compressVideo(videoPath: _videoPath!);
+    } catch (e) {
       l.e(e);
+    } finally {
+      notifyListeners();
     }
   }
 
   Future _compressVideo({required String videoPath}) async {
     try {} catch (e) {
       l.e(e);
+    } finally {
+      notifyListeners();
     }
   }
 
   Future<void> selectVideo(ImageSource _source) async {
-    final XFile? video = await picker.pickVideo(
-        source: _source, maxDuration: const Duration(seconds: 60));
+    try {
+      final XFile? video = await picker.pickVideo(
+          source: _source, maxDuration: const Duration(seconds: 60));
+      _videoPath = video!.path;
+    } catch (e) {
+      l.e(e);
+    } finally {
+      notifyListeners();
+    }
   }
 
   Future<void> selectThumbnail(ImageSource _source) async {
