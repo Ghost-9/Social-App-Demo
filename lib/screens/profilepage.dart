@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social_app_demo/provider/profilepage.dart';
-import 'package:social_app_demo/widgets/constants.dart';
+import 'package:social_app_demo/utilities/constants.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -15,6 +15,7 @@ class ProfilePage extends StatelessWidget {
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
+            elevation: 0,
             backgroundColor: Colors.white,
             centerTitle: true,
             title: Text(
@@ -26,8 +27,8 @@ class ProfilePage extends StatelessWidget {
               child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 16.0, horizontal: 16.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 2.0, horizontal: 16.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,6 +74,23 @@ class ProfilePage extends StatelessWidget {
                                       text: '\tFollowing\t', style: fontStyle)
                                 ]),
                           ),
+                          MaterialButton(
+                              minWidth: 30,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 50.0,
+                              ),
+                              color: state.friendFollowColor,
+                              shape: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide.none,
+                              ),
+                              onPressed: () => state.setFriendStatus =
+                                  state.friendStatusCheck,
+                              child: Text(
+                                state.friendStatusCheck,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              ))
                         ],
                       ),
                     )
@@ -99,7 +117,7 @@ class ProfilePage extends StatelessWidget {
                     return Container(
                       height: _size.height * 1,
                       width: _size.width * .02,
-                      color: Colors.amber,
+                      color: Colors.grey.shade400,
                     );
                   })
             ],
